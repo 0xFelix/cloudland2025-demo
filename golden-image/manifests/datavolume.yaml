@@ -3,7 +3,7 @@ kind: DataVolume
 metadata:
   annotations:
     cdi.kubevirt.io/storage.bind.immediate.requested: "true"
-  name: cloudland2025-demo
+  name: golden-image
 spec:
   source:
     registry:
