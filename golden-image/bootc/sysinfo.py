@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+import socket
+import os
+import psutil
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+
+@app.route("/", methods=["GET"])
+def get_system_info():
+    """
+    HTTP endpoint to return hostname, CPU count, and total memory.
+    """
+    try:
+        hostname = socket.gethostname()
+
+        cpu_count = os.cpu_count()
+
+        total_memory_bytes = psutil.virtual_memory().total
+        total_memory_gb = round(total_memory_bytes / (1024**3), 2)
+
+        system_info = {
+            "hostname": hostname,
+            "cpu_count": cpu_count,
+            "total_memory_gb": total_memory_gb,
+        }
+
+        return jsonify(system_info)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return (
+            jsonify(
+                {"error": "Could not retrieve system information", "details": str(e)}
+            ),
+            500,
+        )
+
+
+if __name__ == "__main__":
+    app.run(debug=False, host="0.0.0.0", port=8080)

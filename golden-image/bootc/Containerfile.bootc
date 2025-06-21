@@ -1,0 +1,12 @@
+FROM quay.io/fedora/fedora-bootc:42
+
+RUN dnf install -y cloud-init qemu-guest-agent \
+  python3 python3-psutil python3-flask \
+  && dnf clean all
+
+COPY sysinfo.py /usr/bin
+COPY sysinfo.conf /usr/lib/sysusers.d
+COPY sysinfo.service /usr/lib/systemd/system
+RUN systemctl enable sysinfo.service
+
+RUN bootc container lint

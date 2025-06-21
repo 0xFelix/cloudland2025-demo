@@ -3,12 +3,12 @@ kind: DataVolume
 metadata:
   annotations:
     cdi.kubevirt.io/storage.bind.immediate.requested: "true"
-  name: fedora-custom-image
+  name: cloudland2025-demo
 spec:
   source:
     registry:
-      url: docker://quay.io/containerdisks/fedora:latest
+      url: docker://quay.io/fmatouschek/cloudland2025-demo:latest
   storage:
     resources:
       requests:
-        storage: 30Gi
+        storage: 2Gi

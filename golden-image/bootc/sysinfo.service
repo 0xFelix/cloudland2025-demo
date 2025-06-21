@@ -1,0 +1,12 @@
+[Unit]
+Description=System Info Application
+After=network.target
+
+[Service]
+User=sysinfo
+Group=sysinfo
+ExecStart=/usr/bin/python3 /usr/bin/sysinfo.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

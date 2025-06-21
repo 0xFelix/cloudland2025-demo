@@ -17,7 +17,7 @@ spec:
         path: golden-image/manifests
       destination:
         server: "{{server}}"
-        namespace: gitops-demo
+        namespace: cloudland2025-demo
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
