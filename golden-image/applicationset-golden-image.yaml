@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: golden-image
+spec:
+  generators:
+  - clusters:
+  template:
+    metadata:
+      name: "{{nameNormalized}}-golden-image"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/0xFelix/cloudland2025-demo.git
+        targetRevision: HEAD
+        path: golden-image/manifests
+      destination:
+        server: "{{server}}"
+        namespace: gitops-demo
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        automated:
+          selfHeal: true
+          prune: true
