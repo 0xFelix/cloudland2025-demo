@@ -2,9 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: golden-image
+  namespace: openshift-gitops
 spec:
   generators:
-  - clusters:
+  - clusters: {}
   template:
     metadata:
       name: "{{nameNormalized}}-golden-image"
