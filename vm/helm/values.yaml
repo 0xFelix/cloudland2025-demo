@@ -1,6 +1,6 @@
 replicaCount: 3
 
 baseDomain: apps.azure-fmatouschek.cnv.azure.devcluster.openshift.com
-storageClassName: azurefile-csi
+storageClassName: azurefile-csi-nfs
 
 sshPubKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyAO+OFdGWWODZnSIbbKo2LQJnzSokOOsRcNZrfvtpE
