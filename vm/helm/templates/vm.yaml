@@ -12,10 +12,10 @@ spec:
   - metadata:
       name: imported-volume-vm-sysinfo-{{ $instance }}
     spec:
-      source:
-        pvc:
-          name: golden-image
-          namespace: {{ $.Release.Namespace }}
+      sourceRef:
+        kind: DataSource
+        name: golden-image
+        namespace: {{ $.Release.Namespace }}
       storage:
         accessModes:
         - ReadWriteMany
