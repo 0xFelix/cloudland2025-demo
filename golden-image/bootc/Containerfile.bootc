@@ -9,4 +9,10 @@ COPY sysinfo.conf /usr/lib/sysusers.d
 COPY sysinfo.service /usr/lib/systemd/system
 RUN systemctl enable sysinfo.service
 
+# Disable nested virt, this is equired when already running in nested virtualization
+RUN printf "options kvm_intel nested=0\noptions kvm_amd nested=0\n" > /etc/modprobe.d/kvm.conf
+
+# Enable automatic onlining of hotplug memory
+RUN echo 'kargs = ["memhp_default_state=online"]' > /usr/lib/bootc/kargs.d/10-memhp.toml
+
 RUN bootc container lint

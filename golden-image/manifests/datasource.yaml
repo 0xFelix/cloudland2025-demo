@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataSource
+metadata:
+  labels:
+    instancetype.kubevirt.io/default-instancetype: u1.medium
+    instancetype.kubevirt.io/default-preference: fedora
+  name: golden-image
+spec:
+  source:
+    pvc:
+      name: golden-image
+      namespace: {{ $.Release.Namespace }}
