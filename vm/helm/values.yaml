@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 
 baseDomain: apps.azure-fmatouschek.cnv.azure.devcluster.openshift.com
 storageClassName: azurefile-csi-nfs
