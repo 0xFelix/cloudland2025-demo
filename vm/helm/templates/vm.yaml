@@ -1,4 +1,4 @@
-{{- range $i := int .Values.replicaCount }}
+{{- range $i := until (int .Values.replicaCount) }}
 {{- $instance := add $i 1 }}
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
