@@ -21,7 +21,7 @@ spec:
         - ReadWriteMany
         storageClassName: {{ $.Values.storageClassName }}
   instancetype:
-    name: u1.large
+    name: u1.xlarge
   preference:
     name: fedora
   runStrategy: Always
