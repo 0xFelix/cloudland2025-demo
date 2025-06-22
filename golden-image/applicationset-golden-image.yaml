@@ -8,7 +8,7 @@ spec:
   - clusters: {}
   template:
     metadata:
-      name: {{ nameNormalized }}-golden-image
+      name: "{{ nameNormalized }}-golden-image"
     spec:
       project: default
       source:
@@ -16,7 +16,7 @@ spec:
         targetRevision: HEAD
         path: golden-image/manifests
       destination:
-        server: {{ server }}
+        server: "{{ server }}"
         namespace: cloudland2025-demo
       syncPolicy:
         syncOptions:

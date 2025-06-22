@@ -8,7 +8,7 @@ spec:
   - clusters: {}
   template:
     metadata:
-      name: {{ nameNormalized }}-vm
+      name: "{{ nameNormalized }}-vm"
     spec:
       project: default
       source:
@@ -16,7 +16,7 @@ spec:
         targetRevision: HEAD
         path: vm/helm
       destination:
-        server: {{ server }}
+        server: "{{ server }}"
         namespace: cloudland2025-demo
       syncPolicy:
         syncOptions:
