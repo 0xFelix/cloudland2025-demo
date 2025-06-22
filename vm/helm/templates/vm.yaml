@@ -1,0 +1,48 @@
+{{- range $i := int .Values.replicaCount }}
+{{- $instance := add $i 1 }}
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: vm-sysinfo-{{ $instance }}
+  labels:
+    {{- include "vm.labels" $ | nindent 4 }}
+    app.kubernetes.io/instance: "{{ $instance }}"
+spec:
+  dataVolumeTemplates:
+  - metadata:
+      name: imported-volume-vm-sysinfo-{{ $instance }}
+    spec:
+      source:
+        pvc:
+          name: golden-image
+          namespace: {{ $.Release.Namespace }}
+      storage:
+        accessModes:
+        - ReadWriteMany
+        storageClassName: {{ $.Values.storageClassName }}
+  instancetype:
+    name: u1.medium
+  preference:
+    name: fedora
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        app: sysinfo
+    spec:
+      domain:
+        devices: {}
+      terminationGracePeriodSeconds: 0
+      volumes:
+      - dataVolume:
+          name: imported-volume-vm-sysinfo-{{ $instance }}
+        name: imported-volume-vm-sysinfo-{{ $instance }}
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            user: fedora
+            ssh_authorized_keys:
+              - {{ $.Values.sshPubKey }}
+        name: cloudinitdisk
+---
+{{- end }}

@@ -1,0 +1,2 @@
+Running {{ .Values.replicaCount }} replicas
+Access the application at sysinfo.{{ .Values.baseDomain }}

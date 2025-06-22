@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: golden-image
+  name: vm
   namespace: openshift-gitops
 spec:
   generators:
   - clusters: {}
   template:
     metadata:
-      name: {{ nameNormalized }}-golden-image
+      name: {{ nameNormalized }}-vm
     spec:
       project: default
       source:
         repoURL: https://github.com/0xFelix/cloudland2025-demo.git
         targetRevision: HEAD
-        path: golden-image/manifests
+        path: vm/helm
       destination:
         server: {{ server }}
         namespace: cloudland2025-demo
