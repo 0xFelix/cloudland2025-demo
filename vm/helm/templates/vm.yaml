@@ -24,7 +24,7 @@ spec:
     name: u1.medium
   preference:
     name: fedora
-  runStrategy: Always
+  runStrategy: {{ $.Values.runStrategy }}
   template:
     metadata:
       labels:
