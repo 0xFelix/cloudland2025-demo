@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import datetime
 import socket
 import os
 import psutil
@@ -11,10 +12,12 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def get_system_info():
     """
-    HTTP endpoint to return hostname, CPU count, and total memory.
+    HTTP endpoint to return hostname, uptime, CPU count, and total memory.
     """
     try:
         hostname = socket.gethostname()
+
+        uptime = get_uptime()
 
         cpu_count = os.cpu_count()
 
@@ -23,6 +26,7 @@ def get_system_info():
 
         system_info = {
             "hostname": hostname,
+            "uptime": uptime,
             "cpu_count": cpu_count,
             "total_memory_gb": total_memory_gb,
         }
@@ -37,6 +41,15 @@ def get_system_info():
             ),
             500,
         )
+
+
+def get_uptime():
+    total_seconds = (
+        datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())
+    ).total_seconds()
+    hours, remainder = divmod(total_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}"
 
 
 if __name__ == "__main__":
