@@ -1,5 +1,5 @@
 replicaCount: 1
-runStrategy: Always
+runStrategy: Halted
 
 baseDomain: apps.azure-fmatouschek.cnv.azure.devcluster.openshift.com
 storageClassName: azurefile-csi-nfs
