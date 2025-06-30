@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 runStrategy: Always
 
 baseDomain: apps.azure-fmatouschek.cnv.azure.devcluster.openshift.com
